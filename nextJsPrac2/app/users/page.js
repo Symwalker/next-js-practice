@@ -1,17 +1,21 @@
-async function userList() {
-  let data = await fetch("https://dummyjson.com/users");
-  data = await data.json();
-  return data.users;
-}
+import getUsers from "@/services/getuserData";
+import Link from "next/link";
 
-export default async function Page() {
-  let users = await userList();
-  return <div>
-    {
+const page = async () => {
+  const users = await getUsers();
+  console.log(users);
 
-       users.map((el,i)=>(
-        <h1>{el.firstName}</h1>
-       ))
-    }
-  </div>;
-}
+  return (
+    <div>
+      <h1>User List</h1>
+
+      {users.map((el) => (
+        <h2 key={el.id}>
+          <Link href={`/users/${el.id}`}>{el.name}</Link>   
+        </h2>
+      ))}
+    </div>
+  );
+};
+
+export default page;
