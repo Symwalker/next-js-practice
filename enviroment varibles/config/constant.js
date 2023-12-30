@@ -1,0 +1,1 @@
+export const API_URL = process.env.NODE_ENV == "production"  ? "www.jsonWebdata.com/api/users" : "https://localhost:5001/api/users"
